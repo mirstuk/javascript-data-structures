@@ -1,6 +1,10 @@
-/* Linked List */
+/*******************************************************************************
+ *
+ *      Linked List
+ *
+ ******************************************************************************/
 
-function LinkedList() {
+const LinkedList = function() {
   let length = 0;
   let head = null;
 
@@ -137,20 +141,22 @@ function LinkedList() {
     }
     return array;
   };
-}
-
-let list = new LinkedList();
+};
+console.log('\nInit a new linked list and adding a bunch of elements\n');
+const list = new LinkedList();
 list.add('Kitten');
 list.add('Puppy');
 list.add('Dog');
 list.add('Cat');
 list.add('Fish');
-console.log('My list: ', list.toArray());
-console.log(`List size is: ${list.size()}`);
-console.log(`Remove element at index 3: ${list.removeAt(3)}`);
-console.log('My list: ', list.toArray());
-console.log(list.addAt(3, 'Lion') ? 'Added element at index 3' : '');
-console.log(`Element at index 3: ${list.elementAt(3)}`);
-console.log(`Index of Element 'Fish': ${list.indexOf('Fish')}`);
-console.log('My list: ', list.toArray());
-console.log(`List size is: ${list.size()}`);
+
+console.log('\nMy list:\n', list.toArray());
+console.log('\nList size is:\n', list.size());
+console.log("\nIndex of Element 'Fish':\n", list.indexOf('Fish'));
+console.log('\nRemove element at index 3:\n', list.removeAt(3));
+console.log('\nNew list:\n', list.toArray());
+
+console.log(list.addAt(3, 'Lion') ? '\nAdded element at index 3\n' : '');
+console.log('\nElement at index 3:\n', list.elementAt(3));
+
+console.log('\nNew list:\n', list.toArray());
