@@ -32,6 +32,25 @@ const MinHeap = function() {
     [heap[b], heap[a]] = [heap[a], heap[b]];
   };
 
+  const minHeapify = function(i) {
+    if (!isLeaf(i)) {
+      if (heap[i] > heap[left(i)] || heap[i] > heap[right(i)]) {
+        if (heap[right(i)]) {
+          if (heap[left(i)] < heap[right(i)]) {
+            swap(i, left(i));
+            minHeapify(left(i));
+          } else {
+            swap(i, right(i));
+            minHeapify(right(i));
+          }
+        } else {
+          swap(i, left(i));
+          minHeapify(left(i));
+        }
+      }
+    }
+  };
+
   this.entries = function() {
     return heap;
   };
@@ -42,7 +61,7 @@ const MinHeap = function() {
       let i = heap.length - 1;
       while (i >= 1) {
         if (heap[i] < heap[parent(i)]) {
-          [heap[parent(i)], heap[i]] = [heap[i], heap[parent(i)]];
+          swap(i, parent(i));
         }
         i = parent(i);
       }
@@ -51,25 +70,19 @@ const MinHeap = function() {
   };
 
   this.remove = function() {
-    // pick min
-    let min;
-    // pop elem and restore heap property
-    if (heap.length <= 2) {
-      min = heap.shift();
-    } else {
-      min = heap[0];
-      let i = 0;
-    }
+    let min = heap[0];
+    swap(0, heap.length - 1);
+    heap.pop();
+    minHeapify(0);
     return min;
   };
 
   this.sort = function() {
-    const heapCopy = [...heap];
     const result = [];
-    let i = heapCopy.remove();
+    let i = this.remove();
     while (i !== undefined) {
       result.push(i);
-      i = heapCopy.remove();
+      i = this.remove();
     }
     return result;
   };
@@ -88,8 +101,9 @@ console.log('\n- insert elem 11\n', h.insert(11));
 console.log('\n- insert elem 8\n', h.insert(8));
 console.log('\n- insert elem 10\n', h.insert(10));
 console.log('\n- insert elem 22\n', h.insert(22));
+console.log('\n- insert elem 1\n', h.insert(1));
 
 // console.log('\n- remove element:\n', h.remove());
-// console.log('\n- remove element:\n', h.remove());
-// console.log('\n- sorted collection:\n', h.sort());
-// console.log('\n- heap is still existing:\n', h.entries());
+// console.log('\n- entries:\n', h.entries());
+
+console.log('\n- sorted collection:\n', h.sort());
