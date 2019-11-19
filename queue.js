@@ -4,7 +4,7 @@
  *
  ******************************************************************************/
 
-function Queue() {
+const Queue = function() {
   const collection = [];
 
   this.entries = function() {
@@ -34,10 +34,10 @@ function Queue() {
   this.isEmpty = function() {
     return collection.length === 0;
   };
-}
+};
 
 const q = new Queue();
-console.log('\n- Init new queue\n');
+console.log('\n- init new queue\n');
 console.log('\n- new queue is empty:\n', q.isEmpty());
 console.log("\n- enqueue element 'a':\n", q.enqueue('a'));
 console.log("\n- enqueue element 'b':\n", q.enqueue('b'));
